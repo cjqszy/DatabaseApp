@@ -2,6 +2,7 @@ package com.example.cln62.databaseapp.data.source.local;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
@@ -26,13 +27,25 @@ public class FeedDao {
 
     public void createRow(TodoNote todoNote){
         Log.d(TAG, todoNote.getTitle() + todoNote.getSubTitle());
-        ContentValues values = new ContentValues();
+        ContentValues values = new ContentValues(); // key-value pair
         values.put(FeedEntry.COLUMN_NAME_TITLE, todoNote.getTitle());
         values.put(FeedEntry.COLUMN_NAME_SUBTITLE, todoNote.getSubTitle());
         sqLiteDatabase.insert(FeedEntry.TABLE_NAME, null, values );
     }
 
-    public void readRow() {}
+    public TodoNote readRow() {
+        //first step: read data from database
+        // select *  from table_name
+        Cursor cursor = sqLiteDatabase.query(FeedEntry.TABLE_NAME, null, null, null,
+                    null, null, null);
+        cursor.moveToLast();
+        int titleIndex = cursor.getColumnIndexOrThrow(FeedEntry.COLUMN_NAME_TITLE);
+        int subTitleIndex = cursor.getColumnIndexOrThrow(FeedEntry.COLUMN_NAME_SUBTITLE);
+        String title = cursor.getString(titleIndex);
+        String subTitle = cursor.getString(subTitleIndex);
+
+        return new TodoNote(title, subTitle);
+    }
 
     public void updateRow(){}
 
