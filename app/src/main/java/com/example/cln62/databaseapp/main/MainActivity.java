@@ -1,17 +1,20 @@
-package com.example.cln62.databaseapp;
+package com.example.cln62.databaseapp.main;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.cln62.databaseapp.R;
 import com.example.cln62.databaseapp.data.TodoNote;
 import com.example.cln62.databaseapp.data.source.local.FeedDao;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MainContract.View{
     EditText titleEditText, subtitleEditText;
     FeedDao feedDao;
+    MainPresenter mainPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         subtitleEditText = findViewById(R.id.editTextSubTitle);
         feedDao = new FeedDao(this);
         feedDao.openDb();
+        mainPresenter = new MainPresenter(this);
     }
 
     public void clickHandler(View view) {
@@ -37,6 +41,15 @@ public class MainActivity extends AppCompatActivity {
                 titleEditText.setText("");
                 subtitleEditText.setText("");
                 break;
+            case R.id.buttonMvp :
+                mainPresenter.onButtonClicked();
+                break;
+
         }
+    }
+
+    @Override
+    public void showToast() {
+        Toast.makeText(MainActivity.this, "Button clicked", Toast.LENGTH_SHORT).show();
     }
 }

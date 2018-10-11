@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".main.MainActivity"
     tools:layout_editor_absoluteY="73dp">
 
     <EditText
@@ -45,8 +45,8 @@
         android:id="@+id/buttonGet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="13dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="40dp"
         android:onClick="clickHandler"
         android:text="get"
         app:layout_constraintEnd_toEndOf="@+id/editTextSubTitle"
@@ -61,5 +61,14 @@
         android:text="TextView"
         app:layout_constraintStart_toEndOf="@+id/buttonPut"
         app:layout_constraintTop_toBottomOf="@+id/buttonPut" />
+
+    <Button
+        android:id="@+id/buttonMvp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="clickHandler"
+        android:text="mvp"
+        tools:layout_editor_absoluteX="136dp"
+        tools:layout_editor_absoluteY="47dp" />
 
 </android.support.constraint.ConstraintLayout>

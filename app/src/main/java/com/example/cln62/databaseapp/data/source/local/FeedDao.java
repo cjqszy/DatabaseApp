@@ -26,11 +26,11 @@ public class FeedDao {
     }
 
     public void createRow(TodoNote todoNote){
-        Log.d(TAG, todoNote.getTitle() + todoNote.getSubTitle());
+//        Log.d(TAG, todoNote.getTitle() + todoNote.getSubTitle());    // just a test
         ContentValues values = new ContentValues(); // key-value pair
         values.put(FeedEntry.COLUMN_NAME_TITLE, todoNote.getTitle());
         values.put(FeedEntry.COLUMN_NAME_SUBTITLE, todoNote.getSubTitle());
-        sqLiteDatabase.insert(FeedEntry.TABLE_NAME, null, values );
+        sqLiteDatabase.insert(FeedEntry.TABLE_NAME, null, values ); // that null means if no data being inserted into, will fill with null
     }
 
     public TodoNote readRow() {
