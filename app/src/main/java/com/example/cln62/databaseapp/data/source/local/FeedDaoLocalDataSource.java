@@ -4,18 +4,19 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
+import com.example.cln62.databaseapp.data.source.TaskDataSource;
 import com.example.cln62.databaseapp.data.source.local.FeedReaderContract.FeedEntry;
 
 import com.example.cln62.databaseapp.data.TodoNote;
 
-public class FeedDao {
+public class FeedDaoLocalDataSource implements TaskDataSource{
     SQLiteDatabase sqLiteDatabase;
     FeedReaderDbHelper feedReaderDbHelper;
-    public static String TAG = FeedDao.class.getSimpleName();
-    public FeedDao(Context context) {
+    public static String TAG = FeedDaoLocalDataSource.class.getSimpleName();
+    public FeedDaoLocalDataSource(Context context) {
         feedReaderDbHelper = new FeedReaderDbHelper(context);
+        sqLiteDatabase = feedReaderDbHelper.getWritableDatabase();
     }
     public void openDb() {
         sqLiteDatabase = feedReaderDbHelper.getWritableDatabase();
@@ -52,4 +53,11 @@ public class FeedDao {
     public void deleteRow(){}
 
 
+    @Override
+    public void saveTodoNote(TodoNote todoNote) {
+        ContentValues values = new ContentValues();
+        values.put(FeedEntry.COLUMN_NAME_TITLE, todoNote.getTitle());
+        values.put(FeedEntry.COLUMN_NAME_SUBTITLE, todoNote.getSubTitle());
+        sqLiteDatabase.insert(FeedEntry.TABLE_NAME, null, values );
+    }
 }
