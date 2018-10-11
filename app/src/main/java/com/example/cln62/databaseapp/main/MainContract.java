@@ -7,7 +7,7 @@ public interface MainContract {
     public interface View {
         // Here the presenter is telling the view(mainActivity)to show a toast.
 
-        public void showToast();
+        public void showTodoNote(TodoNote todoNote);
     };
 
     public interface Presenter{

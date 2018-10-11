@@ -16,7 +16,8 @@ public class FeedDaoLocalDataSource implements TaskDataSource{
     public static String TAG = FeedDaoLocalDataSource.class.getSimpleName();
     public FeedDaoLocalDataSource(Context context) {
         feedReaderDbHelper = new FeedReaderDbHelper(context);
-        sqLiteDatabase = feedReaderDbHelper.getWritableDatabase();
+//        sqLiteDatabase = feedReaderDbHelper.getWritableDatabase();
+        openDb();
     }
     public void openDb() {
         sqLiteDatabase = feedReaderDbHelper.getWritableDatabase();
@@ -59,5 +60,19 @@ public class FeedDaoLocalDataSource implements TaskDataSource{
         values.put(FeedEntry.COLUMN_NAME_TITLE, todoNote.getTitle());
         values.put(FeedEntry.COLUMN_NAME_SUBTITLE, todoNote.getSubTitle());
         sqLiteDatabase.insert(FeedEntry.TABLE_NAME, null, values );
+    }
+
+    @Override
+    public void getTodoNote(GetTodoNoteCallback callback) {
+        Cursor cursor = sqLiteDatabase.query(FeedEntry.TABLE_NAME, null, null, null,
+                null, null, null);
+        cursor.moveToLast();
+        int titleIndex = cursor.getColumnIndexOrThrow(FeedEntry.COLUMN_NAME_TITLE);
+        int subTitleIndex = cursor.getColumnIndexOrThrow(FeedEntry.COLUMN_NAME_SUBTITLE);
+        String title = cursor.getString(titleIndex);
+        String subTitle = cursor.getString(subTitleIndex);
+
+        TodoNote todoNote = new TodoNote(title, subTitle);
+        callback.onTodoNoteLoaded(todoNote); // this will call MainPresenter line 28
     }
 }

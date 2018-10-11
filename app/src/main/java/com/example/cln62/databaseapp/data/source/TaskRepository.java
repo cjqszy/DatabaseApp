@@ -18,4 +18,9 @@ public class TaskRepository implements TaskDataSource{
     public void saveTodoNote(TodoNote todoNote) {
         feedDaoLocalDataSource.saveTodoNote(todoNote);
     }
+
+    @Override
+    public void getTodoNote(GetTodoNoteCallback callback) {
+        feedDaoLocalDataSource.getTodoNote(callback);
+    }
 }

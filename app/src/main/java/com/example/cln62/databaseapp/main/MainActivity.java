@@ -30,9 +30,8 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     public void clickHandler(View view) {
         switch (view.getId()) {
             case R.id.buttonGet :
-                TodoNote todoNote = feedDaoLocalDataSource.readRow();
-                TextView textView = findViewById(R.id.textView);
-                textView.setText(todoNote.getTitle() + "\n" + todoNote.getSubTitle());
+                mainPresenter.onButtonClicked();
+//                TodoNote todoNote = feedDaoLocalDataSource.readRow();
                 break;
             case R.id.buttonPut :
                 String title = titleEditText.getText().toString();
@@ -51,7 +50,9 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     }
 
     @Override
-    public void showToast() {
-        Toast.makeText(MainActivity.this, "Button clicked", Toast.LENGTH_SHORT).show();
+    public void showTodoNote(TodoNote todoNote) {
+//        Toast.makeText(MainActivity.this, "Button clicked", Toast.LENGTH_SHORT).show();
+        TextView textView = findViewById(R.id.textView);
+        textView.setText(todoNote.getTitle() + "\n" + todoNote.getSubTitle());
     }
 }

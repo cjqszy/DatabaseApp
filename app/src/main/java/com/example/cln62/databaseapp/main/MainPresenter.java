@@ -4,7 +4,7 @@ import com.example.cln62.databaseapp.data.TodoNote;
 import com.example.cln62.databaseapp.data.source.TaskDataSource;
 import com.example.cln62.databaseapp.data.source.TaskRepository;
 
-public class MainPresenter implements MainContract.Presenter {
+public class MainPresenter implements MainContract.Presenter, TaskDataSource.GetTodoNoteCallback {
     MainContract.View view;
     TaskDataSource taskRepository;
 
@@ -15,11 +15,16 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void onButtonClicked() {
-        view.showToast();
+        taskRepository.getTodoNote(this); // from here to line 28
     }
 
     @Override
     public void saveNote(TodoNote todoNote1) {
         taskRepository.saveTodoNote(todoNote1);
+    }
+
+    @Override
+    public void onTodoNoteLoaded(TodoNote todoNote) {
+        view.showTodoNote(todoNote);
     }
 }
