@@ -2,15 +2,15 @@ package com.example.cln62.databaseapp.data.source.local;
 
 import android.provider.BaseColumns;
 
-public final class FeedReaderContract {
+public final class TodoContract {
     // To prevent someone from accidentally instantiating the contract class,
     // give it an empty constructor.
-    public FeedReaderContract() {}
+    public TodoContract() {}
 
     /* Inner class that defines the table contents */
-    public static abstract class FeedEntry implements BaseColumns {
+    public static abstract class TodoEntry implements BaseColumns {
         public static final String TABLE_NAME = "entry";
-        public static final String COLUMN_NAME_ENTRY_ID = "entryid";
+//        public static final String COLUMN_NAME_ENTRY_ID = "entryid";
         public static final String COLUMN_NAME_TITLE = "title";
         public static final String COLUMN_NAME_SUBTITLE = "subtitle";
     }

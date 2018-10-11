@@ -4,26 +4,26 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.cln62.databaseapp.data.source.local.FeedReaderContract.FeedEntry;
+import com.example.cln62.databaseapp.data.source.local.TodoContract.TodoEntry;
 
 
-public class FeedReaderDbHelper extends SQLiteOpenHelper {
+public class TodoDbHelper extends SQLiteOpenHelper {
     // If you change the database schema, you must increment the database version.
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "FeedReader.db";
     private static final String TEXT_TYPE = " TEXT";
     private static final String COMMA_SEP = ",";
     private static final String SQL_CREATE_ENTRIES =
-            "CREATE TABLE " + FeedEntry.TABLE_NAME + " (" +
-                    FeedEntry._ID + " INTEGER PRIMARY KEY," +
-//                    FeedEntry.COLUMN_NAME_ENTRY_ID + TEXT_TYPE + COMMA_SEP +
-                    FeedEntry.COLUMN_NAME_TITLE + TEXT_TYPE + COMMA_SEP
-                    + FeedEntry.COLUMN_NAME_SUBTITLE + TEXT_TYPE + " )";
+            "CREATE TABLE " + TodoEntry.TABLE_NAME + " (" +
+                    TodoEntry._ID + " INTEGER PRIMARY KEY," +
+//                    TodoEntry.COLUMN_NAME_ENTRY_ID + TEXT_TYPE + COMMA_SEP +
+                    TodoEntry.COLUMN_NAME_TITLE + TEXT_TYPE + COMMA_SEP
+                    + TodoContract.TodoEntry.COLUMN_NAME_SUBTITLE + TEXT_TYPE + " )";
 
     private static final String SQL_DELETE_ENTRIES =
-            "DROP TABLE IF EXISTS " + FeedEntry.TABLE_NAME;
+            "DROP TABLE IF EXISTS " + TodoEntry.TABLE_NAME;
 
-    public FeedReaderDbHelper(Context context) {
+    public TodoDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 

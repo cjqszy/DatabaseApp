@@ -5,15 +5,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.cln62.databaseapp.R;
 import com.example.cln62.databaseapp.data.TodoNote;
-import com.example.cln62.databaseapp.data.source.local.FeedDaoLocalDataSource;
+import com.example.cln62.databaseapp.data.source.local.TodoDaoLocalDataSource;
 
 public class MainActivity extends AppCompatActivity implements MainContract.View{
     EditText titleEditText, subtitleEditText;
-    FeedDaoLocalDataSource feedDaoLocalDataSource;
+    TodoDaoLocalDataSource todoDaoLocalDataSource;
     MainPresenter mainPresenter;
 
     @Override
@@ -22,8 +21,8 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         setContentView(R.layout.activity_main);
         titleEditText = findViewById(R.id.editTextTitle);
         subtitleEditText = findViewById(R.id.editTextSubTitle);
-        feedDaoLocalDataSource = new FeedDaoLocalDataSource(this);
-        feedDaoLocalDataSource.openDb();
+        todoDaoLocalDataSource = new TodoDaoLocalDataSource(this);
+        todoDaoLocalDataSource.openDb();
         mainPresenter = new MainPresenter(this);
     }
 
@@ -31,14 +30,14 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         switch (view.getId()) {
             case R.id.buttonGet :
                 mainPresenter.onButtonClicked();
-//                TodoNote todoNote = feedDaoLocalDataSource.readRow();
+//                TodoNote todoNote = todoDaoLocalDataSource.readRow();
                 break;
             case R.id.buttonPut :
                 String title = titleEditText.getText().toString();
                 String subTitle = subtitleEditText.getText().toString();
                 TodoNote todoNote1 = new TodoNote(title, subTitle);
                 mainPresenter.saveNote(todoNote1);
-//                feedDaoLocalDataSource.createRow(todoNote1);
+//                todoDaoLocalDataSource.createRow(todoNote1);
                 titleEditText.setText("");
                 subtitleEditText.setText("");
                 break;
